@@ -1,0 +1,7 @@
+Flask
+Flask-Script
+Flask-SQLAlchemy
+Flask-Testing
+Flask-SocketIO
+Flask-Restful
+Flask-Marshmallow
