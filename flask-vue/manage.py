@@ -15,5 +15,6 @@ if __name__ == "__main__":
     manager.add_command("apps", commands.Apps())
     manager.add_command("db-create", commands.CreateDB())
     manager.add_command("db-drop", commands.DropDB())
+    manager.add_command("routes", commands.Routes())
 
     manager.run()
