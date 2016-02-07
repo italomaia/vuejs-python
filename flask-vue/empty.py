@@ -18,19 +18,6 @@ class BlueprintException(Exception):
 basestring = getattr(__builtins__, 'basestring', str)
 
 
-def _import_module(blueprint_path, module):
-    try:
-        return __import__('.'.join(blueprint_path.split('.') + [module]))
-    except ImportError:
-        print("Module %s is not available for %s" % (module, blueprint_path))
-
-
-def _import_variable(blueprint_path, module, variable_name):
-    path = '.'.join(blueprint_path.split('.') + [module])
-    mod = __import__(path, fromlist=[variable_name])
-    return getattr(mod, variable_name)
-
-
 class Empty(Flask):
 
     def configure(self, config):
@@ -173,6 +160,7 @@ class Empty(Flask):
             except:
                 raise NoExtensionException('No {e_name} extension found'.format(e_name=ext_path))
 
+            # TODO: check if ext is a module for safety
             if getattr(ext, 'init_app', False):
                 ext.init_app(self)
             else:
