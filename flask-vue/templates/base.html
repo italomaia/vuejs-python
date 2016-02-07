@@ -1,28 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
+    <title>{% block site_title %}VueJS Blog with Python{% endblock %}</title>
 
-    <title>Flask Vue</title>
+    <!--[if IE]><link rel="shortcut icon" href="favicon.ico"><![endif]-->
+    <link rel="shortcut icon" href="favicon.ico">
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
-    <!-- CSS IMPORTS
-    <link rel="stylesheet" type="text/css" href="" />
-    -->
-    {% block styles %}{% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
 
-    {% block content %}
-    {% endblock %}
+{% block body %}{% endblock %}
 
-    <!-- JS IMPORTS
-    <script type="application/javascript" src=""></script>
-    -->
-    {% block scripts %}{% endblock %}
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js"></script>
+
+{% assets "js_all" %}
+<script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 </body>
 </html>
-
