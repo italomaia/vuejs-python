@@ -5,3 +5,4 @@ Flask-Testing
 Flask-SocketIO
 Flask-Restful
 Flask-Marshmallow
+Flask-Assets
