@@ -1,0 +1,5 @@
+# ignore cache
+/static/.*
+
+# ignore auto-generated js files
+/static/js/*.js
