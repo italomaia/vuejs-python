@@ -45,17 +45,20 @@ class Config(object):
     DEFAULT_MAIL_SENDER = "example@%s.com" % project_name
 
     EXTENSIONS = [
+        'extensions.toolbar',
         'extensions.db',
         'extensions.ma',
         'extensions.rest_api',
+        'extensions.assets',
+        'extensions.admin',
     ]
 
-    LOAD_MODULES_EXTENSIONS = ['views', 'models', 'rest_api']
+    LOAD_MODULES_EXTENSIONS = ['admin', 'views', 'models', 'api']
 
     # see example/ for reference
     # ex: BLUEPRINTS = ['blog']  # where app is a Blueprint instance
     # ex: BLUEPRINTS = [('blog', {'url_prefix': '/myblog'})]  # where app is a Blueprint instance
-    BLUEPRINTS = ['blog']
+    BLUEPRINTS = [('blog', {'url_prefix': '/'})]
 
 
 # config class for development environment

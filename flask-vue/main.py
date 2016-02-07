@@ -14,12 +14,8 @@ basestring = getattr(__builtins__, 'basestring', str)
 
 
 class App(Empty):
-    
-    def configure_views(self):
-        @self.route('/')
-        def index_view():
-            return render_template("index.html")
-    
+    pass
+
 
 def config_str_to_obj(cfg):
     if isinstance(cfg, basestring):
