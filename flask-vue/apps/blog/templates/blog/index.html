@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+<nav>
+    <div class="nav-wrapper container">
+        <a href="#" class="brand-logo">Blog.VueJS</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="showHistory">History</a></li>
+            <li><a href="showAbout">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div vue-list src="{{ url_for('api.posts') }}">
+        <div v-for="item in results">
+            <header v-text="item.title"></header>
+            <section v-text="item.html"></section>
+            <footer v-text="item.tags"></footer>
+        </div>
+    </div>
+</div>
+{% endblock %}
