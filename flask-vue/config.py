@@ -45,12 +45,13 @@ class Config(object):
     DEFAULT_MAIL_SENDER = "example@%s.com" % project_name
 
     EXTENSIONS = [
-        'extensions.toolbar',
-        'extensions.db',
-        'extensions.ma',
-        'extensions.rest_api',
-        'extensions.assets',
-        'extensions.admin',
+        'extensions.debug.toolbar',
+        'extensions.database.db',
+        'extensions.schemas.ma',
+        'extensions.socketio.socketio',
+        'extensions.api.rest_api',
+        'extensions.webassets.assets',
+        'extensions.admin.admin',
     ]
 
     LOAD_MODULES_EXTENSIONS = ['admin', 'views', 'models', 'api']
