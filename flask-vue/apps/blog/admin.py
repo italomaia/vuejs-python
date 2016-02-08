@@ -1,7 +1,8 @@
-from extensions import admin, db
+from extensions.admin import admin
+from extensions.database import db
 from flask_admin.contrib.sqla import ModelView
 
-from .models import *
+from .models import Post
 
 
 class PostView(ModelView):

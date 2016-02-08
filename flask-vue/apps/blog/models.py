@@ -1,4 +1,4 @@
-from extensions import db
+from extensions.database import db
 import datetime
 
 
