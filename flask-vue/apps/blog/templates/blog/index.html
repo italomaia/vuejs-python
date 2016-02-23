@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block body %}
-<nav>
+<nav class="blue">
     <div class="nav-wrapper container">
         <a href="#" class="brand-logo">Blog.VueJS</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -13,11 +13,27 @@
 
 <div class="container">
     <div vue-list src="{{ url_for('api.posts') }}">
-        <div v-for="item in results">
-            <header v-text="item.title"></header>
-            <section v-text="item.html"></section>
-            <footer v-text="item.tags"></footer>
+        <div class="blue lighten-2 white-text card-panel">
+            To add a new post, <b><a href="/admin/post/" class="white-text">click here</a></b>.
+            The blog has ${count} ${count | pluralize 'post'} published right now.
+        </div>
+        <div v-if="results">
+            <div v-for="item in results" class="blue card-panel white-text">
+                <header>
+                    <h5 v-text="item.title"></h5>
+                </header>
+                <section v-html="item.html"></section>
+                <footer v-text="item.tags"></footer>
+            </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript" src="//cdn.socket.io/socket.io-1.4.5.js"></script>
+<script type="text/javascript">
+    var socket = io.connect("/blog/io");
+</script>
+{{ super() }}
 {% endblock %}
