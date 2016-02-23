@@ -28,7 +28,10 @@ class ModelResource(Resource):
 
     def get(self, pk=None):
         if pk is None:
-            return self.schema.dump(self.get_all(), many=True).data
+            return {
+                'count': self.get_query().count(),
+                'results': self.schema.dump(self.get_all(), many=True).data
+            }
 
         return self.schema.dump(self.get_one(pk)).data
 
