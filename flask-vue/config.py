@@ -10,12 +10,15 @@ project_name = "flask-vue"
 class Config(object):
     # use DEBUG mode?
     DEBUG = False
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
 
     # use TESTING mode?
     TESTING = False
 
     # use server x-sendfile?
     USE_X_SENDFILE = False
+
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     # DATABASE CONFIGURATION
     # see http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html#database-urls
@@ -54,7 +57,13 @@ class Config(object):
         'extensions.admin.admin',
     ]
 
-    LOAD_MODULES_EXTENSIONS = ['admin', 'views', 'models', 'api']
+    LOAD_MODULES_EXTENSIONS = [
+        'api',
+        'admin',
+        'views',
+        'models',
+        'socket',
+    ]
 
     # see example/ for reference
     # ex: BLUEPRINTS = ['blog']  # where app is a Blueprint instance
