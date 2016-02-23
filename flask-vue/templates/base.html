@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="favicon.ico">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -17,9 +18,16 @@
 <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.min.js"></script>
+<script type="text/javascript">
+    // ES6 template string style (this is important!)
+    Vue.config.delimiters = ['${', '}'];
+</script>
+<script type="text/javascript" src="//cdn.socket.io/socket.io-1.4.5.js"></script>
 
+{% block extra_scripts %}
 {% assets "js_all" %}
 <script type="text/javascript" src="{{ ASSET_URL }}"></script>
 {% endassets %}
+{% endblock %}
 </body>
 </html>
