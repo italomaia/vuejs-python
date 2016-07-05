@@ -6,5 +6,6 @@ Flask-SocketIO
 Flask-Restful
 Flask-Marshmallow
 Flask-Assets
+Flask-Admin
 WTForms-Alchemy
 Mistune
