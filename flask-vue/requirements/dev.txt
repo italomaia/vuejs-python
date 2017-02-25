@@ -1,2 +1,2 @@
 -r common.txt
-flask-debugtoolbar
+Flask-DebugToolbar==0.10.1
