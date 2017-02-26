@@ -1,11 +1,5 @@
-from flask import Blueprint
-from flask import render_template, flash, redirect, url_for
-
-app = Blueprint(
-    'blog', __name__,
-    template_folder='templates',
-    static_folder='static'
-)
+from flask import render_template
+from .bp import app
 
 
 @app.route("/")
