@@ -15,17 +15,25 @@
 
 {% block body %}{% endblock %}
 
-<script type="text/javascript"
+<script
+    type="text/javascript"
     crossorigin="anonymous"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     src="//code.jquery.com/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
-<script type="text/javascript">
+<script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+<script
+    type="text/javascript">
     // ES6 template string style (this is important!)
     Vue.config.delimiters = ['${', '}'];
 </script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+<script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
 
 {% block extra_scripts %}
 {% assets "js_all" %}
