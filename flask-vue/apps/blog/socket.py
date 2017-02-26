@@ -13,8 +13,9 @@ def post_after_commit(sender, changes):
             emit_new_posts()
             break
 
-models_committed.connect(post_after_commit)
-
 
 def emit_new_posts():
     socketio.emit('new posts', namespace=namespace)
+
+
+models_committed.connect(post_after_commit)
