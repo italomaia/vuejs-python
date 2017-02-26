@@ -1,2 +1,3 @@
 -r common.txt
 Flask-DebugToolbar==0.10.1
+flask-shell-ipython==0.2.2
