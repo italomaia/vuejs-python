@@ -3,7 +3,6 @@
 import os
 import sys
 from empty import Empty
-from flask import render_template
 
 
 # apps is a special folder where you can place your blueprints
