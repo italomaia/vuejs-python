@@ -17,7 +17,7 @@ class Post(db.Model):
     html = db.Column(db.Text)
     tags = db.Column(db.Unicode(60), index=True)
 
-    def __str__(self):
+    def __str__(self):  # noqa: D105
         return self.title
 
     @classmethod
