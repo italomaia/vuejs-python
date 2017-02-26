@@ -52,7 +52,6 @@ class Config(object):
         'extensions.database.db',
         'extensions.schemas.ma',
         'extensions.socketio.socketio',
-        'extensions.api.rest_api',
         'extensions.webassets.assets',
         'extensions.admin.admin',
     ]
