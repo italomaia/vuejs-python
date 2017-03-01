@@ -26,10 +26,10 @@
 <script
     type="text/javascript"
     src="//cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
-<script
-    type="text/javascript">
-    // ES6 template string style (this is important!)
-    Vue.config.delimiters = ['${', '}'];
+<script type="text/javascript">
+  Vue.filter('pluralize', function (value, plural) {
+    return (value == 1) ? '' : (plural || 's');
+  });
 </script>
 <script
     type="text/javascript"
