@@ -1,11 +1,7 @@
 from flask_assets import Environment, Bundle
 
-assets = Environment()
 
-coffee_filters = [
-    'coffeescript',
-    #'uglifyjs'
-]
+assets = Environment()
 
 # TODO: pack js files, compiled, into project's /static
 coffee = Bundle(
@@ -13,7 +9,7 @@ coffee = Bundle(
     # in this example there is but one file, but this scales alright!
     # you may also use nested bundles http://webassets.readthedocs.org/en/latest/bundles.html#nested-bundles
     'blog/coffee/app.coffee',
-    filters=coffee_filters,
+    filters='coffeescript',
     # our output js will have this structure
     output='js/apps.min.js'
 )
