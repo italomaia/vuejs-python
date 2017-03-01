@@ -20,15 +20,16 @@ basestring = getattr(__builtins__, 'basestring', str)
 
 class Empty(Flask):
 
-    def configure(self, config):
+    def configure(self, config=None):
         """
         Load configuration class into flask app.
 
         If environment variable available, overwrites class config.
         """
         self.config.from_object(config)
+
         # could/should be available in server environment
-        self.config.from_envvar("APP_CONFIG", silent=True)
+        self.config.from_envvar("FLASK_CONFIG", silent=False)
 
     def add_blueprint(self, name, kw):
         for module in self.config['LOAD_MODULES_EXTENSIONS']:
