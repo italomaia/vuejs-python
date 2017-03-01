@@ -1,19 +1,18 @@
-from flask_restful import Resource
-from flask import request
+from flask import request, jsonify
+from flask.views import MethodView
 
 
-class ModelResource(Resource):
+class Resource(MethodView):
     session = None
     model = None
     schema = None
     schema_cls = None
+    pk_param = 'pk'
+    pk_type = 'int'
 
     def __init__(self, session=None, schema_cls=None):
-        session = session or self.session
         schema_cls = schema_cls or self.schema_cls
-
-        self.session = session
-        self.schema_cls = schema_cls
+        self.session = session or self.session
         self.schema = schema_cls()
         self.model = schema_cls.Meta.model
 
@@ -28,10 +27,13 @@ class ModelResource(Resource):
 
     def get(self, pk=None):
         if pk is None:
-            return {
+            return jsonify({
                 'count': self.get_query().count(),
-                'results': self.schema.dump(self.get_all(), many=True).data
-            }
+                'results': self.schema.dump(
+                    self.get_all(),
+                    many=True
+                ).data
+            })
 
         return self.schema.dump(self.get_one(pk)).data
 
@@ -67,4 +69,3 @@ class ModelResource(Resource):
         self.session.delete(instance)
         self.session.commit()
         return self.schema.dump(instance).data
-

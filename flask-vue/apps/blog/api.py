@@ -1,18 +1,28 @@
-from extensions.api import rest_api
 from extensions.schemas import ma
 from extensions.database import db
-from utils.api import ModelResource
+from utils.api import Resource
 from blog.models import Post
+from .bp import app
 
 
-class PostSchema(ma.Schema):
+class PostSchema(ma.ModelSchema):
     class Meta:
         model = Post
 
 
-class PostResource(ModelResource):
+class PostResource(Resource):
     session = db.session
     schema_cls = PostSchema
 
 
-rest_api.add_resource(PostResource, '/posts', endpoint='api.posts')
+post_api = PostResource.as_view('post_api')
+app.add_url_rule(
+    '/posts',
+    view_func=post_api,
+    methods=['GET', 'POST']
+)
+app.add_url_rule(
+    '/posts/<int:pk>',
+    view_func=post_api,
+    methods=['GET', 'PUT', 'DELETE']
+)
