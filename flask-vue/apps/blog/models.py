@@ -1,5 +1,7 @@
 from extensions.database import db
-from flask_sqlalchemy import before_models_committed
+from sqlalchemy import event
+
+from slugify import slugify
 
 import mistune
 import datetime
@@ -10,7 +12,7 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     created = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    modified = db.Column(db.DateTime)
+    modified = db.Column(db.DateTime, onupdate=datetime.datetime.utcnow)
     title = db.Column(db.Unicode(100))
     slug = db.Column(db.Unicode(100))
     text = db.Column(db.Text)
@@ -20,17 +22,14 @@ class Post(db.Model):
     def __str__(self):  # noqa: D105
         return self.title
 
-    @classmethod
-    def before_commit(sender, app, changes):
-        for model, change in changes:
-            if isinstance(model, Post) and change in ('insert', 'update'):
-                # onupdate for field is only called if field is in the SET
-                # this makes sure it is always called
-                model.modified = datetime.datetime.utcnow()
 
-                # as we don't want the html to be edited manually
-                # the html has to be generated for each row update
-                model.html = mistune.markdown(model.text)
+@event.listens_for(Post.title, 'set')
+def post_on_title_set(target, value, oldvalue, initiator):
+    target.slug = slugify(value)
 
 
-before_models_committed.connect(Post.before_commit)
+# as we don't want the html to be edited manually
+# the html has to be generated for each row update
+@event.listens_for(Post.text, 'set')
+def post_on_text_set(target, value, oldvalue, initiator):
+    target.html = mistune.markdown(value)
