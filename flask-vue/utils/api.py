@@ -1,6 +1,9 @@
 from flask import request, jsonify
 from flask.views import MethodView
 
+MAX_PER_PAGE = 20
+FIRST_PAGE = 1
+
 
 class Resource(MethodView):
     session = None
@@ -16,6 +19,22 @@ class Resource(MethodView):
         self.schema = schema_cls()
         self.model = schema_cls.Meta.model
 
+    def get_page(self):
+        try:
+            value = request.args.get('page')
+            return FIRST_PAGE if value is None else max(FIRST_PAGE, int(value))
+        except ValueError:
+            return FIRST_PAGE
+
+    def get_per_page(self):
+        try:
+            value = request.args.get('per_page')
+            return MAX_PER_PAGE \
+                if value is None \
+                else min(MAX_PER_PAGE, int(value))
+        except ValueError:
+            return MAX_PER_PAGE
+
     def get_query(self):
         return self.model.query
 
@@ -27,13 +46,24 @@ class Resource(MethodView):
 
     def get(self, pk=None):
         if pk is None:
-            return jsonify({
-                'count': self.get_query().count(),
-                'results': self.schema.dump(
-                    self.get_all(),
+            pagination = self.get_query().paginate(
+                self.get_page(),
+                self.get_per_page()
+            )
+            return jsonify(dict(
+                items=self.schema.dump(
+                    pagination.items,
                     many=True
-                ).data
-            })
+                ).data,
+                items_count=len(pagination.items),
+                has_next=pagination.has_next,
+                has_prev=pagination.has_prev,
+                page=pagination.page,
+                pages=pagination.pages,
+                next_num=pagination.next_num,
+                prev_num=pagination.prev_num,
+                total=pagination.total
+            ))
 
         return self.schema.dump(self.get_one(pk)).data
 

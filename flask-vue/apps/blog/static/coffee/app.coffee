@@ -1,13 +1,21 @@
 VueListModel = Vue.extend
   data: ->
-    results: []
-    count: 0
-    new_posts: false
+    items: []
+    items_count: 0
+    has_next: false
+    has_prev: false
+    next_num: null
+    prev_num: null
+    page: 0
+    pages: 0
+    total: 0
 
   mounted: ->
     el = $ @$el
     src = el.attr 'src'
-    $.get(src).done (data) => @$data = data
+    $.get(src).done (data) =>
+      for k,v of data
+        this[k] = v
 
     socket.on 'new posts', => Materialize.toast('New Post! Press F5 to update.', 3000)
 
