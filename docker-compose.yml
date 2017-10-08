@@ -1,0 +1,12 @@
+version: '3.2'
+
+services:
+  webapp:
+    build: ./flask-vue
+    env_file:
+    - envfile
+  ux:
+    build: ./ux
+    command: ["npm", "run", "build"]
+    env_file:
+    - envfile

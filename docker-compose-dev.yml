@@ -1,0 +1,20 @@
+version: '3.2'
+
+services:
+  webapp:
+    env_file:
+    - envfile.dev
+    ports:
+    - "5000:5000"
+    volumes:
+    - ./flask-vue:/home/usr
+  ux:
+    command: ["npm", "run", "dev"]
+    env_file:
+    - envfile.dev
+    volumes:
+    - ./ux/index.html:/home/node/index.html
+    - ./ux/package.json:/home/node/package.json
+    - ./ux/static:/home/node/static
+    - ./ux/test:/home/node/test
+    - ./ux/src:/home/node/src

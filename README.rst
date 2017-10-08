@@ -9,6 +9,10 @@ having these examples are ideal for the brave-of-heart.
 flask-vue
 ---------
 
+## quickstart
+
+docker-compose -f docker-compose.yml -f docker-compose-dev.yml up
+
 **flask-vue** is the first project made. It shows how to
 use flask and vuejs to build a non-SPA (single page
 application). This approach is more appropriate for
