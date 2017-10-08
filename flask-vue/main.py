@@ -13,21 +13,18 @@ basestring = getattr(__builtins__, 'basestring', str)
 
 
 class App(Empty):
-    pass
-
-
-def config_str_to_obj(cfg):
-    if isinstance(cfg, basestring):
-        module = __import__('config', fromlist=[cfg])
-        return getattr(module, cfg)
-    return cfg
+    def configure_views(self):
+        @self.route("/")
+        def index_view():
+            return """
+        Hello My Friend. This is an example flask view.
+        Try creatting blueprints inside ./apps and setting
+        them up in your config.py file.""".strip()
 
 
 def app_factory(config, app_name, blueprints=None):
     # you can use Empty directly if you wish
     app = App(app_name)
-    config = config_str_to_obj(config)
-
     app.configure(config)
     app.add_blueprint_list(blueprints or config.BLUEPRINTS)
     app.setup()
@@ -36,6 +33,6 @@ def app_factory(config, app_name, blueprints=None):
 
 
 def heroku():
-    from config import Config, project_name
+    import config
     # setup app through APP_CONFIG envvar
-    return app_factory(Config, project_name)
+    return app_factory(config, config.project_name)

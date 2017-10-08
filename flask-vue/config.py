@@ -1,32 +1,31 @@
-# config:utf-8
-
+import os
 import logging
 from datetime import timedelta
 
-project_name = "flask-vue"
+project_name = os.getenv('PROJECT')
 
 
 # base config class; extend it to your needs.
 # use DEBUG mode?
-DEBUG = False
+DEBUG = os.getenv('FLASK_DEBUG') == '1'
 DEBUG_TB_INTERCEPT_REDIRECTS = False
 
+SERVER_NAME = os.getenv("SERVER_NAME")
+
 # use TESTING mode?
-TESTING = False
+TESTING = os.getenv('FLASK_TESTING') == '1'
 
 # use server x-sendfile?
-USE_X_SENDFILE = False
-
-SQLALCHEMY_TRACK_MODIFICATIONS = True
+USE_X_SENDFILE = os.getenv('FLASK_USE_X_SENDFILE') == '1'
 
 # DATABASE CONFIGURATION
 # see http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html#database-urls
-SQLALCHEMY_DATABASE_URI = ""
-SQLALCHEMY_ECHO = False
+SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
+SQLALCHEMY_ECHO = os.getenv('SQLALCHEMY_ECHO') == '1'
 SQLALCHEMY_TRACK_MODIFICATIONS = not DEBUG
 
-WTF_CSRF_ENABLED = True
-SECRET_KEY = "secret"  # import os; os.urandom(24)
+WTF_CSRF_ENABLED = os.getenv('FLASK_WTF_CSRF_ENABLED') == '1'
+SECRET_KEY = os.getenv('FLASK_SECRET', 'secret')  # import os; os.urandom(24)
 
 # LOGGING
 LOGGER_NAME = "%s_log" % project_name
@@ -53,7 +52,6 @@ EXTENSIONS = [
     'extensions.database.migrate',
     'extensions.schemas.ma',
     'extensions.socketio.socketio',
-    'extensions.webassets.assets',
     'extensions.admin.admin',
 ]
 
@@ -66,6 +64,9 @@ LOAD_MODULES_EXTENSIONS = [
 ]
 
 # see example/ for reference
-# ex: BLUEPRINTS = ['blog']  # where app is a Blueprint instance
-# ex: BLUEPRINTS = [('blog', {'url_prefix': '/myblog'})]  # where app is a Blueprint instance
-BLUEPRINTS = [('blog', {'url_prefix': ''})]
+# where app is a Blueprint instance
+#
+# Examples:
+# BLUEPRINTS = ['blog']  # where app is a Blueprint instance
+# BLUEPRINTS = [('blog', {'url_prefix': '/myblog'})]
+BLUEPRINTS = []

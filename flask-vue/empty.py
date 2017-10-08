@@ -1,5 +1,3 @@
-# coding:utf-8
-
 __all__ = ['Empty']
 
 from flask import Flask, render_template
@@ -28,8 +26,9 @@ class Empty(Flask):
         """
         self.config.from_object(config)
 
-        # could/should be available in server environment
-        self.config.from_envvar("FLASK_CONFIG", silent=False)
+        if config is None:
+            # could/should be available in server environment
+            self.config.from_envvar("FLASK_CONFIG", silent=False)
 
     def add_blueprint(self, name, kw):
         for module in self.config['LOAD_MODULES_EXTENSIONS']:

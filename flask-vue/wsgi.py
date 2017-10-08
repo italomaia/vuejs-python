@@ -1,6 +1,6 @@
 # coding:utf-8
 
 from main import app_factory
-from config import cmm
+import config
 
-app = app_factory(cmm, cmm.project_name)
+app = app_factory(config, config.project_name)
